@@ -6,8 +6,9 @@ import {
   IsLongitude,
   IsNumber,
 } from "class-validator";
+import { Expose, Transform } from "class-transformer";
 
-export class ReportDto {
+export class CreateReportDto {
   @IsNumber()
   price: number;
 
@@ -32,4 +33,34 @@ export class ReportDto {
 
   @IsLatitude()
   lat: number;
+}
+
+export class ReportDto {
+  @Expose()
+  id: number;
+
+  @Expose()
+  price: number;
+
+  @Expose()
+  year: number;
+
+  @Expose()
+  lng: number;
+
+  @Expose()
+  lat: number;
+
+  @Expose()
+  make: string;
+
+  @Expose()
+  model: string;
+
+  @Expose()
+  mileage: string;
+
+  @Transform(({ obj }) => obj.user.id)
+  @Expose()
+  userId: number;
 }
